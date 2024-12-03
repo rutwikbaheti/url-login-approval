@@ -1,16 +1,17 @@
-// Simulated decryption function (replace with your actual algorithm)
+// Simulated decryption function (replace with your actual decryption algorithm)
 function decrypt(encrypted) {
   return atob(encrypted); // Decodes Base64-encoded strings
 }
 
-// Extract URL path components
-const path = window.location.pathname.split('/').filter(Boolean); // Remove empty segments
+// Capture the full URL path
+const path = window.location.pathname.split('/').filter(Boolean);  // Split the URL into segments
 
-// Get the response element
+// Get the response element and status message elements
 const responseElement = document.getElementById('jsonResponse');
 const statusMessageElement = document.getElementById('statusMessage');
 const doneMessageElement = document.getElementById('doneMessage');  // Done message element
 
+// Check if the URL has the required segments
 if (path.length === 5) {
   const encryptedUniqueCode = path[0];
   const encryptedEmailId = path[1];
@@ -23,7 +24,7 @@ if (path.length === 5) {
   try {
     uniqueCode = decrypt(encryptedUniqueCode);
     emailId = decrypt(encryptedEmailId);
-    sentTimestamp = new Date(decrypt(encryptedTimestamp)); // Decrypted timestamp as Date object
+    sentTimestamp = new Date(decrypt(encryptedTimestamp)); // Convert decrypted timestamp to Date object
     action = decrypt(encryptedAction); // Decrypt the action (approve or reject)
 
     // Get the current timestamp
