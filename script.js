@@ -27,12 +27,12 @@ if (encryptedUniqueCode && encryptedEmailId && encryptedTimestamp && encryptedAc
     emailId = decrypt(encryptedEmailId);
     sentTimestamp = new Date(decrypt(encryptedTimestamp)); // Convert decrypted timestamp to Date object
     action = decrypt(encryptedAction); // Decrypt the action (approve or reject)
-    console.log("uniqueCode : "+uniqueCode+", emailId : "+emailId+", sentTimestamp : "+sentTimestamp+", action : "+action);
+
     // Get the current timestamp
     const currentTimestamp = new Date();
 
     // Validate the timestamp (check if it's within 2 minutes)
-    const timeDifference = (currentTimestamp - sentTimestamp) / 1000 / 60; // Difference in minutes
+    const timeDifference = (currentTimestamp- sentTimestamp) / 1000 * 60; // Difference in minutes
 
     if (timeDifference > 2) {
       // Construct JSON response for expired URL
