@@ -3,25 +3,26 @@ function decrypt(encrypted) {
   return atob(encrypted); // Decodes Base64-encoded strings
 }
 
-// Capture the full URL path
-const path = window.location.pathname.split('/').filter(Boolean);  // Split the URL into segments
+// Get the query string from the URL
+const urlParams = new URLSearchParams(window.location.search);
+
+// Get the encrypted query parameter names and values
+const encryptedUniqueCode = urlParams.get('dW5pcXVlQ29kZQ==');  // Encrypted "uniqueCode"
+const encryptedEmailId = urlParams.get('ZW1haWxJZA==');       // Encrypted "emailId"
+const encryptedTimestamp = urlParams.get('dGltZXN0YW1w');       // Encrypted "timestamp"
+const encryptedAction = urlParams.get('YWN0aW9u');              // Encrypted "action"
 
 // Get the response element and status message elements
 const responseElement = document.getElementById('jsonResponse');
 const statusMessageElement = document.getElementById('statusMessage');
 const doneMessageElement = document.getElementById('doneMessage');  // Done message element
 
-// Check if the URL has the required segments
-if (path.length === 5) {
-  const encryptedUniqueCode = path[0];
-  const encryptedEmailId = path[1];
-  const encryptedTimestamp = path[2];
-  const encryptedAction = path[3];
-
-  // Decrypt the values
+// Check if the URL has the required parameters
+if (encryptedUniqueCode && encryptedEmailId && encryptedTimestamp && encryptedAction) {
   let uniqueCode, emailId, sentTimestamp, action;
 
   try {
+    // Decrypt the values
     uniqueCode = decrypt(encryptedUniqueCode);
     emailId = decrypt(encryptedEmailId);
     sentTimestamp = new Date(decrypt(encryptedTimestamp)); // Convert decrypted timestamp to Date object
@@ -78,11 +79,11 @@ if (path.length === 5) {
 
 } else {
   responseElement.textContent = JSON.stringify(
-    { error: 'Invalid URL structure' },
+    { error: 'Missing URL parameters' },
     null,
     2
   );
   statusMessageElement.style.display = 'none';  // Hide "Processing..." message
-  doneMessageElement.textContent = 'Failed: Invalid URL structure';
+  doneMessageElement.textContent = 'Failed: Missing URL parameters';
   doneMessageElement.style.display = 'block';  // Display "Failed" message
 }
