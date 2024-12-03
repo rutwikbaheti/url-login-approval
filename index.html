@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Url Login Approval Page</title>
+  <style>
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .status-message {
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>Login Approval</h1>
+  
+  <!-- JSON Response will be displayed here -->
+  <pre id="jsonResponse"></pre>
+  
+  <!-- Initial Processing message -->
+  <p id="statusMessage" class="status-message">Processing Request...</p>
+  
+  <!-- Done or Failed message -->
+  <p id="doneMessage" class="status-message" style="display: none;"></p>
+
+  <script src="script.js"></script>
+</body>
+</html>
