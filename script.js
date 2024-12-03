@@ -27,7 +27,7 @@ if (encryptedUniqueCode && encryptedEmailId && encryptedTimestamp && encryptedAc
     emailId = decrypt(encryptedEmailId);
     sentTimestamp = new Date(decrypt(encryptedTimestamp)); // Convert decrypted timestamp to Date object
     action = decrypt(encryptedAction); // Decrypt the action (approve or reject)
-
+    console.log("uniqueCode : "+uniqueCode+", emailId : "+emailId+", sentTimestamp : "+sentTimestamp+", action : "+action);
     // Get the current timestamp
     const currentTimestamp = new Date();
 
